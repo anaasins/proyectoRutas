@@ -1,7 +1,7 @@
 rutas:
     resource: "@RutasBundle/Controller/"
     type:     annotation
-    prefix:   rutas/
+    prefix:   /
 
 app:
     resource: '@AppBundle/Controller/'

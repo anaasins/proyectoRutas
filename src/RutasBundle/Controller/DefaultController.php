@@ -16,7 +16,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/descripcionRuta, name=descripcionRuta")
+     * @Route("/descripcionRuta", name="descripcionRuta")
      */
     public function descripcionRutaAction()
     {
@@ -24,7 +24,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/anadirRuta, name=anadirRuta")
+     * @Route("/anadirRuta", name="anadirRuta")
      */
     public function anadirRutaAction()
     {
@@ -32,7 +32,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/editarRuta, name=editarRuta")
+     * @Route("/editarRuta", name="editarRuta")
      */
     public function editarRutaAction()
     {
@@ -40,7 +40,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/rutasPropias, name=rutasPropias")
+     * @Route("/rutasPropias", name="rutasPropias")
      */
     public function rutasPropiasAction()
     {

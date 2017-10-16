@@ -5,15 +5,15 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <link rel="stylesheet" href="{{ assets('css/menu.css')  }}">
+        <link rel="stylesheet" href="{{ asset('css/menu.css')  }}">
     </head>
     <body>
         {% block body %}
         <nav class="menu">
-          <a class="item" href="#">Início</a>
-          <a class="item" href="#">Rutas</a>
-          <a class="item" href="#">Añadir ruta</a>
-          <a class="item" href="#">Mis rutas</a>
+          <a class="item" href="">Início</a>
+          <a class="item" href="">Rutas</a>
+          <a class="item" href="">Añadir ruta</a>
+          <a class="item" href="">Mis rutas</a>
         </nav>
         {% endblock %}
         {% block javascripts %}{% endblock %}
