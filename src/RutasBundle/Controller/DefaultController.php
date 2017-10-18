@@ -4,6 +4,7 @@ namespace RutasBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use RutasBundle\Entity\ruta;
 
 class DefaultController extends Controller
 {
@@ -45,5 +46,16 @@ class DefaultController extends Controller
     public function rutasPropiasAction()
     {
         return $this->render('RutasBundle:Default:rutasPropias.html.twig');
+    }
+    /**
+     * @Route("/index", name="listaIndex")
+     */
+    public function listaIndexAction()
+    {
+      //devolver la clase para interactuar con la BBDD
+        $repository = $this->getDoctrine()->getRepository(ruta::class);
+      //sacar lo que queramos de la base de datos
+        $rutas = $repository->findAll();
+        return $this->render('RutasBundle:Default:index.html.twig', array('rutas'=>$rutas));
     }
 }

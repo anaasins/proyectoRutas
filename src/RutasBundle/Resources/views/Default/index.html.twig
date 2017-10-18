@@ -1,1 +1,11 @@
 {% extends 'base.html.twig' %}
+{% block body %}
+<ul>
+  {% for ruta in rutas %}
+    <li><img src="{{ruta.imagenes}}" alt=""></li>
+    <li> {{ruta.nombre}} {{ruta.descripcion}} {{ruta.nivel}}</li>
+    <li>{{ruta.lugar}} {{ruta.duracion}}</li>
+    <li>{{ruta.organizador}}</li>
+  {% endfor %}
+</ul>
+{% endblock %}
