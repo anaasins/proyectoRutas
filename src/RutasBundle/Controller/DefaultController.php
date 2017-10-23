@@ -13,7 +13,11 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('RutasBundle:Default:index.html.twig');
+      //devolver la clase para interactuar con la BBDD
+        $repository = $this->getDoctrine()->getRepository(ruta::class);
+      //sacar lo que queramos de la base de datos
+        $rutas = $repository->findAll();
+        return $this->render('RutasBundle:Default:index.html.twig', array('rutas'=>$rutas));
     }
 
     /**
@@ -46,16 +50,5 @@ class DefaultController extends Controller
     public function rutasPropiasAction()
     {
         return $this->render('RutasBundle:Default:rutasPropias.html.twig');
-    }
-    /**
-     * @Route("/index", name="listaIndex")
-     */
-    public function listaIndexAction()
-    {
-      //devolver la clase para interactuar con la BBDD
-        $repository = $this->getDoctrine()->getRepository(ruta::class);
-      //sacar lo que queramos de la base de datos
-        $rutas = $repository->findAll();
-        return $this->render('RutasBundle:Default:index.html.twig', array('rutas'=>$rutas));
     }
 }
