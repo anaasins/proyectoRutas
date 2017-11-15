@@ -315,4 +315,28 @@ class ruta
     {
         return $this->imagenes;
     }
+
+    /**
+     * Set usuario
+     *
+     * @param \RutasBundle\Entity\usuario $usuario
+     *
+     * @return usuario
+     */
+    public function setUsuario(\RutasBundle\Entity\usuario $usuario = null)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usaurio
+     *
+     * @return \RutasBundle\Entity\usuario
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
 }
