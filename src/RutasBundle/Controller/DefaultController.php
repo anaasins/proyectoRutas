@@ -5,6 +5,8 @@ namespace RutasBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use RutasBundle\Entity\ruta;
+use RutasBundle\Form\rutaType;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -31,9 +33,21 @@ class DefaultController extends Controller
     /**
      * @Route("/anadirRuta", name="anadirRuta")
      */
-    public function anadirRutaAction()
+    public function anadirRutaAction(Request $request)
     {
-        return $this->render('RutasBundle:Default:anadirRuta.html.twig');
+      $rutas = new ruta();
+      $form = $this->createForm(rutaType::class, $rutas);
+
+      $form->handleRequest($request);
+      if ($form->isSubmitted() && $form->isValid()) {
+       $ruta = $form->getData();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($ruta);
+        $em->flush();
+
+       return $this->render('RutasBundle:Default:index.html.twig');
+   }
+        return $this->render('RutasBundle:Default:anadirRuta.html.twig', array('form'=>$form->createView()));
     }
 
     /**
