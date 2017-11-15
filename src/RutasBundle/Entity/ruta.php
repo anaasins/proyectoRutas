@@ -331,7 +331,7 @@ class ruta
     }
 
     /**
-     * Get usaurio
+     * Get usuario
      *
      * @return \RutasBundle\Entity\usuario
      */
