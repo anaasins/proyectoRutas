@@ -63,6 +63,11 @@ class usuario
      */
     private $contra;
 
+    /**
+    * @ORM\OneToMany(targetEntity="ruta", mappedBy="usuario")
+    */
+    private $rutas;
+
 
     /**
      * Get id
@@ -218,4 +223,3 @@ class usuario
         return $this->contra;
     }
 }
-

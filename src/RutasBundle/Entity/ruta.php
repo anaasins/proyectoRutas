@@ -84,6 +84,11 @@ class ruta
      */
     private $imagenes;
 
+    /**
+    * @ORM\ManyToOne(targetEntity="usuario", inversedBy="rutas")
+    * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+    */
+    private $usuario;
 
     /**
      * Get id
@@ -311,4 +316,3 @@ class ruta
         return $this->imagenes;
     }
 }
-
