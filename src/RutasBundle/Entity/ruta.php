@@ -316,7 +316,7 @@ class ruta
         return $this->imagenes;
     }
 
-    
+
 
     /**
      * Set usuario
@@ -341,4 +341,5 @@ class ruta
     {
         return $this->usuario;
     }
+    
 }
