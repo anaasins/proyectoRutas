@@ -222,49 +222,4 @@ class usuario
     {
         return $this->contra;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->rutas = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add ruta
-     *
-     * @param \RutasBundle\Entity\ruta $ruta
-     *
-     * @return usuario
-     */
-    public function addRuta(\RutasBundle\Entity\ruta $ruta)
-    {
-        $this->rutas[] = $ruta;
-
-        return $this;
-    }
-
-    /**
-     * Remove ruta
-     *
-     * @param \RutasBundle\Entity\ruta $ruta
-     */
-    public function removeRuta(\RutasBundle\Entity\ruta $ruta)
-    {
-        $this->rutas->removeElement($ruta);
-    }
-
-    /**
-     * Get rutas
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getRutas()
-    {
-        return $this->rutas;
-    }
-    public function __toString()
-    {
-      return $this->user;
-    }
 }

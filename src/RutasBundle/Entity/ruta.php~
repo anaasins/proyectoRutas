@@ -317,28 +317,4 @@ class ruta
     }
 
     
-
-    /**
-     * Set usuario
-     *
-     * @param \RutasBundle\Entity\usuario $usuario
-     *
-     * @return ruta
-     */
-    public function setUsuario(\RutasBundle\Entity\usuario $usuario = null)
-    {
-        $this->usuario = $usuario;
-
-        return $this;
-    }
-
-    /**
-     * Get usuario
-     *
-     * @return \RutasBundle\Entity\usuario
-     */
-    public function getUsuario()
-    {
-        return $this->usuario;
-    }
 }
