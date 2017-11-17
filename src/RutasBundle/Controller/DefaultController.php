@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="index")
      */
     public function indexAction()
     {
@@ -45,24 +45,42 @@ class DefaultController extends Controller
         $em->persist($ruta);
         $em->flush();
 
-       return $this->render('RutasBundle:Default:index.html.twig');
+       return $this->redirectToRoute('index');
    }
         return $this->render('RutasBundle:Default:anadirRuta.html.twig', array('form'=>$form->createView()));
     }
 
     /**
-     * @Route("/editarRuta", name="editarRuta")
+     * @Route("/editarRuta/{id}", name="editarRuta")
      */
-    public function editarRutaAction()
+    public function editarRutaAction(Request $request, $id)
     {
-        return $this->render('RutasBundle:Default:editarRuta.html.twig');
+      $ruta=$this->getDoctrine()->getRepository(ruta::class)->find($id);
+
+      $form=$this->createForm(rutaType::class, $ruta);
+      $form->handleRequest($request);
+      if ($form->isSubmitted() && $form->isValid()) {
+
+         //$cerveza = $form->getData();
+         $em = $this->getDoctrine()->getManager();
+         $em->persist($ruta);
+         $em->flush();
+
+         return $this->redirectToRoute('index');
+       }
+
+      return $this->render('RutasBundle:Default:editarRuta.html.twig', array('form'=>$form->createView()));
     }
 
     /**
-     * @Route("/rutasPropias", name="rutasPropias")
+     * @Route("/eliminarRuta/{id}", name="eliminarRuta")
      */
-    public function rutasPropiasAction()
+    public function eliminarRutaAction($id)
     {
-        return $this->render('RutasBundle:Default:rutasPropias.html.twig');
+      $db=$this->getDoctrine()->getManager();
+      $eliminar = $db ->getRepository('RutasBundle:ruta')->find($id);
+      $db->remove($eliminar);
+      $db->flush();
+        return $this->redirectToRoute('index');
     }
 }
