@@ -78,7 +78,7 @@ class DefaultController extends Controller
     public function eliminarRutaAction($id)
     {
       $db=$this->getDoctrine()->getManager();
-      $eliminar = $db ->getRepository('RutasBundle:ruta')->find($id);
+      $eliminar = $db ->getRepository(ruta::class)->find($id);
       $db->remove($eliminar);
       $db->flush();
         return $this->redirectToRoute('index');
