@@ -25,3 +25,8 @@ a, a:visited, a:link, a:hover{
   text-decoration: none;
   color: inherit;
 }
+label{
+  color: #4E5452;
+  font-weight: bold;
+  font-variant: small-caps;
+}
