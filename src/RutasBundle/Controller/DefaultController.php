@@ -83,4 +83,28 @@ class DefaultController extends Controller
       $db->flush();
         return $this->redirectToRoute('index');
     }
+
+    /**
+     * @Route("/mostrarNivel/{nivel}", name="mostrarNivel")
+     */
+    public function mostrarNivelAction($nivel='facil')
+    {
+      //devolver la clase para interactuar con la BBDD
+        $repository = $this->getDoctrine()->getRepository(ruta::class);
+      //sacar lo que queramos de la base de datos
+        $rutas = $repository->findByNivel($nivel);
+        return $this->render('RutasBundle:Default:mostrarNivel.html.twig', array('rutas'=>$rutas));
+    }
+
+    /**
+     * @Route("/mostrarId/{id}", name="mostrarId")
+     */
+    public function mostrarIdAction($id)
+    {
+      //devolver la clase para interactuar con la BBDD
+        $repository = $this->getDoctrine()->getRepository(ruta::class);
+      //sacar lo que queramos de la base de datos
+        $rutas = $repository->findOneById($id);
+        return $this->render('RutasBundle:Default:mostrarId.html.twig', array('rutas'=>$rutas));
+    }
 }

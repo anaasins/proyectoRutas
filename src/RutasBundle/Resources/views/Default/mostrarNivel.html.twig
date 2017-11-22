@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+  {% for ruta in rutas %}
+  <div class="w3-panel w3-pale-green w3-bottombar w3-border-green w3-border">
+    <img src="{{ruta.imagenes}}" alt="">
+    <p> {{ruta.nombre}} : {{ruta.descripcion}} </p>
+    <p> Nivel: {{ruta.nivel}}</p>
+    <p> Lugar: {{ruta.lugar}}</p>
+    <p>Duracion: {{ruta.duracion}}</p>
+    <p>Organizada por: {{ruta.organizador}}</p>
+    <p>Creada por: {{ruta.usuario}}</p>
+    <p><a href="{{ path('mostrarId', {'id': ruta.id}) }}">MOSTRAR--></a></p>    
+  </div>
+  {% endfor %}
+
+{% endblock %}

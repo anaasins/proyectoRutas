@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+  <div class="w3-panel w3-pale-green w3-bottombar w3-border-green w3-border">
+    <p>ID: {{rutas.id}}</p>
+    <p>Nombre: {{rutas.nombre}}</p>
+    <p> Descripcion: {{rutas.descripcion}} </p>
+    <p> Nivel: {{rutas.nivel}}</p>
+    <p> Lugar: {{rutas.lugar}}</p>
+    <p>Duracion: {{rutas.duracion}}</p>
+    <p>Organizada por: {{rutas.organizador}}</p>
+    <p>Creada por: {{rutas.usuario}}</p>
+
+  </div>
+
+
+{% endblock %}
