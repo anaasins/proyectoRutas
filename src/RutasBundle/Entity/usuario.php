@@ -3,6 +3,9 @@
 namespace RutasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * usuario
@@ -10,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="usuario")
  * @ORM\Entity(repositoryClass="RutasBundle\Repository\usuarioRepository")
  */
-class usuario
+class usuario implements UserInterface
 {
     /**
      * @var int
@@ -24,21 +27,24 @@ class usuario
     /**
      * @var string
      *
-     * @ORM\Column(name="user", type="string", length=255)
+     * @ORM\Column(name="username", type="string", length=255)
+     * @Assert\NotBlank()
      */
-    private $user;
+    private $username;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="apellidos", type="string", length=255)
+     * @ORM\Column(name="nombre", type="string", length=255)
      */
-    private $apellidos;
+    private $nombre;
 
     /**
      * @var string
      *
      * @ORM\Column(name="correo", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $correo;
 
@@ -57,16 +63,27 @@ class usuario
     private $ciudad;
 
     /**
+    * @Assert\NotBlank()
+    * @Assert\Length(max=4096)
+    */
+    private $plainPassword;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="contra", type="string", length=255)
+     * @ORM\Column(name="password", type="string", length=64)
      */
-    private $contra;
+    private $password;
 
     /**
     * @ORM\OneToMany(targetEntity="ruta", mappedBy="usuario")
     */
     private $rutas;
+
+    /**
+    * @ORM\Column(type="string", length=255, nullable=true)
+    */
+    private $roles;
 
 
     /**
@@ -80,51 +97,65 @@ class usuario
     }
 
     /**
-     * Set user
+     * Set username
      *
-     * @param string $user
+     * @param string $username
      *
      * @return usuario
      */
-    public function setUser($user)
+    public function setUsername($username)
     {
-        $this->user = $user;
+        $this->username = $username;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get username
      *
      * @return string
      */
-    public function getUser()
+    public function getUsername()
     {
-        return $this->user;
+        return $this->username;
     }
 
     /**
-     * Set apellidos
+     * Set nombre
      *
-     * @param string $apellidos
+     * @param string $nombre
      *
      * @return usuario
      */
-    public function setApellidos($apellidos)
+    public function setNombre($nombre)
     {
-        $this->apellidos = $apellidos;
+        $this->nombre = $nombre;
 
         return $this;
     }
 
     /**
-     * Get apellidos
+     * Set roles
+     *
+     * @param string $roles
+     *
+     * @return usuario
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
      *
      * @return string
      */
-    public function getApellidos()
+    public function getNombre()
     {
-        return $this->apellidos;
+        return $this->nombre;
     }
 
     /**
@@ -199,28 +230,38 @@ class usuario
         return $this->ciudad;
     }
 
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
+
     /**
-     * Set contra
+     * Set password
      *
-     * @param string $contra
+     * @param string $password
      *
      * @return usuario
      */
-    public function setContra($contra)
+    public function setPassword($password)
     {
-        $this->contra = $contra;
+        $this->password = $password;
 
         return $this;
     }
 
     /**
-     * Get contra
+     * Get password
      *
      * @return string
      */
-    public function getContra()
+    public function getPassword()
     {
-        return $this->contra;
+        return $this->password;
     }
     /**
      * Constructor
@@ -265,6 +306,23 @@ class usuario
     }
     public function __toString()
     {
-      return $this->user;
+      return $this->username;
     }
+
+    public function getSalt()
+    {
+    // The bcrypt and argon2i algorithms don't require a separate salt.
+    // You *may* need a real salt if you choose a different encoder.
+    return null;
+  }
+
+  public function getRoles()
+  {
+    return array('ROLE_USER');
+  }
+
+  public function eraseCredentials()
+  {
+
+  }
 }
