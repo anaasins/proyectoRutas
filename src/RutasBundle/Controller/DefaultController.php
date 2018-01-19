@@ -31,7 +31,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/anadirRuta", name="anadirRuta")
+     * @Route("/admin/anadirRuta", name="anadirRuta")
      */
     public function anadirRutaAction(Request $request)
     {
@@ -51,7 +51,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/editarRuta/{id}", name="editarRuta")
+     * @Route("/admin/editarRuta/{id}", name="editarRuta")
      */
     public function editarRutaAction(Request $request, $id)
     {
@@ -73,7 +73,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/eliminarRuta/{id}", name="eliminarRuta")
+     * @Route("/admin/eliminarRuta/{id}", name="eliminarRuta")
      */
     public function eliminarRutaAction($id)
     {

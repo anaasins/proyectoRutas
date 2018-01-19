@@ -46,4 +46,35 @@ class UsuariosController extends Controller
               array('form' => $form->createView())
           );
       }
+
+      /**
+       * @Route("/usuarios", name="usuarios")
+       */
+      public function usuariosAction()
+      {
+        //devolver la clase para interactuar con la BBDD
+          $repository = $this->getDoctrine()->getRepository(ruta::class);
+        //sacar lo que queramos de la base de datos
+          $rutas = $repository->findAll();
+          return $this->render('RutasBundle:Default:index.html.twig', array('rutas'=>$rutas));
+      }
+
+    /**
+     * @Route("/usuarios/login", name="login")
+     */
+    public function loginAction(Request $request)
+    {
+      $authenticationUtils = $this->get('security.authentication_utils');
+
+      // get the login error if there is one
+      $error = $authenticationUtils->getLastAuthenticationError();
+
+      // last username entered by the user
+      $lastUsername = $authenticationUtils->getLastUsername();
+
+      return $this->render('RutasBundle:Default:login.html.twig', array(
+          'last_username' => $lastUsername,
+          'error'         => $error,
+      ));
+    }
 }
