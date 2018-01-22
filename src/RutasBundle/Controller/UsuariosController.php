@@ -31,6 +31,8 @@ class UsuariosController extends Controller
               $user->setPassword($password);
 
               // 4) save the User!
+              $roles = ["ROLE_ADMIN"];
+              $user->setRoles($roles);
               $em = $this->getDoctrine()->getManager();
               $em->persist($user);
               $em->flush();

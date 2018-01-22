@@ -81,9 +81,12 @@ class usuario implements UserInterface
     private $rutas;
 
     /**
-    * @ORM\Column(type="string", length=255, nullable=true)
-    */
-    private $roles;
+     * @var string
+     *
+     * @ORM\Column(name="roles", type="json_array")
+     */
+    private $roles = array();
+
 
 
     /**
@@ -135,18 +138,19 @@ class usuario implements UserInterface
     }
 
     /**
-     * Set roles
-     *
-     * @param string $roles
-     *
-     * @return usuario
-     */
-    public function setRoles($roles)
+    * Set roles
+    *
+    * @param string $roles
+    *
+    * @return Usuario
+    */
+    public function setRoles(array $roles)
     {
         $this->roles = $roles;
-
+        // allows for chaining
         return $this;
     }
+
 
     /**
      * Get nombre
@@ -318,8 +322,9 @@ class usuario implements UserInterface
 
   public function getRoles()
   {
-    return array('ROLE_USER');
+    return $this->roles;
   }
+
 
   public function eraseCredentials()
   {
