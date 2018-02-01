@@ -22,6 +22,7 @@ security:
                 property: username
     access_control:
         - {path: ^/admin, roles: ROLE_ADMIN}
+        - {path: ^/gestionUsuarios, roles: ROLE_ADMIN}
         - {path: ^/usuarios/login,roles: IS_AUTHENTICATED_ANONYMOUSLY}
 
     firewalls:

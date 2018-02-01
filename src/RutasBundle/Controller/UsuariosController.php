@@ -8,12 +8,13 @@ use RutasBundle\Entity\ruta;
 use RutasBundle\Form\rutaType;
 use RutasBundle\Entity\usuario;
 use RutasBundle\Form\usuarioType;
+use RutasBundle\Form\editarUsuarioType;
 use Symfony\Component\HttpFoundation\Request;
 
 class UsuariosController extends Controller
 {
       /**
-       * @Route("/registro", name="registro")
+       * @Route("/gestionUsuarios/registro", name="registro")
        */
       public function registroAction(Request $request)
       {
@@ -40,7 +41,7 @@ class UsuariosController extends Controller
               // ... do any other work - like sending them an email, etc
               // maybe set a "flash" success message for the user
 
-              return $this->redirectToRoute('index');
+              return $this->redirectToRoute('listaUsuarios');
           }
 
           return $this->render(
@@ -79,4 +80,51 @@ class UsuariosController extends Controller
           'error'         => $error,
       ));
     }
+
+    /**
+     * @Route("/gestionUsuarios/lista", name="listaUsuarios")
+     */
+    public function listaAction()
+    {
+      //devolver la clase para interactuar con la BBDD
+        $repository = $this->getDoctrine()->getRepository(usuario::class);
+      //sacar lo que queramos de la base de datos
+        $usuarios = $repository->findAll();
+        return $this->render('RutasBundle:Default:listaUsuarios.html.twig', array('usuarios'=>$usuarios));
+    }
+
+    /**
+     * @Route("/gestionUsuarios/editar/{id}", name="editarUsuario")
+     */
+    public function editarAction(Request $request, $id)
+    {
+      $usuario=$this->getDoctrine()->getRepository(usuario::class)->find($id);
+
+      $form=$this->createForm(editarUsuarioType::class, $usuario);
+      $form->handleRequest($request);
+      if ($form->isSubmitted() && $form->isValid()) {
+
+         //$cerveza = $form->getData();
+         $em = $this->getDoctrine()->getManager();
+         $em->persist($usuario);
+         $em->flush();
+
+         return $this->redirectToRoute('listaUsuarios');
+       }
+
+      return $this->render('RutasBundle:Default:editarUsuario.html.twig', array('form'=>$form->createView()));
+    }
+
+
+        /**
+         * @Route("/gestionUsuarios/eliminar/{id}", name="eliminarUsuario")
+         */
+        public function eliminarAction($id)
+        {
+          $db=$this->getDoctrine()->getManager();
+          $eliminar = $db ->getRepository(usuario::class)->find($id);
+          $db->remove($eliminar);
+          $db->flush();
+            return $this->redirectToRoute('listaUsuarios');
+        }
 }

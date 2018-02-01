@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+  {% for usuario in usuarios %}
+  <div class="w3-panel w3-pale-green w3-bottombar w3-border-green w3-border">
+    <p> NOMBRE: {{usuario.nombre}}</p>
+    <p> USUARIO: {{usuario.username}}</p>
+    <p> CORREO: {{usuario.correo}}</p>
+    <p>TELEFONO: {{usuario.telefono}}</p>
+    <p>CIUDAD: {{usuario.ciudad}}</p>
+    <p><a href="{{ path('editarUsuario', {'id': usuario.id}) }}" style="color: blue;">EDITAR</a></p>
+    <p><a href="{{ path('eliminarUsuario', {'id': usuario.id}) }}" style="color: blue;">ELIMINAR</a></p>
+  </div>
+  {% endfor %}
+
+{% endblock %}

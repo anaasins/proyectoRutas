@@ -12,8 +12,9 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class usuarioType extends AbstractType
+class editarUsuarioType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -26,12 +27,14 @@ class usuarioType extends AbstractType
         ->add('correo', EmailType::class, array('attr' => array('class' => 'w3-input'),))
         ->add('telefono', NumberType::class, array('attr' => array('class' => 'w3-input'),))
         ->add('ciudad', TextType::class, array('attr' => array('class' => 'w3-input'),))
-        ->add('plainPassword', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Contraseña'),
-                'second_options' => array('label' => 'Repetir Contraseña'),
-            ))
-        ->add('Registrar', SubmitType::class, array('attr' => array('class' => 'w3-btn w3-green w3-round-large w3-xlarge'),))
+        ->add('roles', ChoiceType::class, array(
+          'multiple' => true,
+          'choices' => array(
+            'admin' => 'ROLE_ADMIN',
+            'user' => 'ROLE_USER'
+          ),
+        ))
+        ->add('Editar', SubmitType::class, array('attr' => array('class' => 'w3-btn w3-green w3-round-large w3-xlarge'),))
         ->add('Borrar', ResetType::class, array('attr' => array('class' => 'w3-btn w3-green w3-round-large w3-xlarge'),))
         ;
     }
