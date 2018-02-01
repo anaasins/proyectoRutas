@@ -10,6 +10,9 @@
     <p>Duracion: {{ruta.duracion}}</p>
     <p>Organizada por: {{ruta.organizador}}</p>
     <p>Creada por: {{ruta.usuario}}</p>
+    <p><a href="{{ path('editarRuta', {'id': ruta.id}) }}" style="color: blue;">EDITAR</a></p>
+    <p><a href="{{ path('eliminarRuta', {'id': ruta.id}) }}" style="color: blue;">ELIMINAR</a></p>
+
   </div>
   {% endfor %}
 
